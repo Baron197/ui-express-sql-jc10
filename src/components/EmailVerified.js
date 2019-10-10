@@ -3,13 +3,14 @@ import axios from 'axios';
 import queryString from 'query-string';
 import { connect } from 'react-redux';
 import { confirmLogin } from '../actions';
+import { API_URL } from '../helpers/apiurl';
 
 class EmailVerified extends Component {
     state = { message: 'Verifying Email, Please Wait...' }
 
     componentDidMount() {
         var params = queryString.parse(this.props.location.search)
-        axios.post('http://localhost:1997/confirmemail', {
+        axios.post(API_URL + '/user/confirmemail', {
             email: params.email
         }).then(res => {
             this.setState({ message: 'Email Berhasil di Confirm'})

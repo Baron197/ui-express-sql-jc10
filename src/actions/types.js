@@ -13,3 +13,6 @@ export const LOGIN_PASSWORD_CHANGED = 'LOGIN_PASSWORD_CHANGED';
 export const ON_USER_LOGIN = 'ON_USER_LOGIN';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
+//user 
+export const LOGOUT_USER = 'LOGOUT_USER';

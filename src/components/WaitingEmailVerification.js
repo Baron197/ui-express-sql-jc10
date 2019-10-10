@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import axios from 'axios';
+import { API_URL } from '../helpers/apiurl';
 
 class WaitingEmailVerification extends Component {
 
@@ -8,7 +9,7 @@ class WaitingEmailVerification extends Component {
         console.log(this.props.location.search)
         var params = queryString.parse(this.props.location.search)
         console.log(params)
-        axios.post('http://localhost:1997/resendemailconfirm', {
+        axios.post(API_URL + '/user/resendemailconfirm', {
             email: params.email
         }).then(res => {
             alert(res.data.message)

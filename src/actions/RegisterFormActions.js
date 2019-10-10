@@ -11,6 +11,8 @@ import {
     REGISTER_SUCCESS
 } from './types';
 
+import { API_URL } from '../helpers/apiurl'
+
 export const inputRegisterEmail = (email) => {
     return {
         type: REGISTER_EMAIL_CHANGED,
@@ -54,7 +56,7 @@ export const registerUser = (user) => {
             && user.confirmPassword !== '') {
                 if(user.email === user.confirmEmail) {
                     if(user.password === user.confirmPassword) {
-                       axios.post('http://localhost:1997/register', {
+                       axios.post(API_URL + '/user/register', {
                            email: user.email,
                            password: user.password,
                            username: user.username

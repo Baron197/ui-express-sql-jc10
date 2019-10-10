@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { ubahPikachu } from '../actions';
+import { API_URL } from '../helpers/apiurl';
 
 class ManageToko extends Component {
     state = { 
@@ -27,12 +28,12 @@ class ManageToko extends Component {
     }
 
     getInitialData = () => {
-        axios.get('http://localhost:1997/gettoko')
+        axios.get(API_URL + '/toko/gettoko')
             .then((res) => {
                 console.log('Masuk Then')
                 console.log(res.data)
                 this.setState({ listToko: res.data })
-                axios.get('http://localhost:1997/getkota')
+                axios.get(API_URL + '/kota/getkota')
                     .then((res) => {
                         this.setState({ listKota: res.data, selectedEditId: 0 })
                     }).catch((err) => {
@@ -87,7 +88,7 @@ class ManageToko extends Component {
             }
             formdata.append('data', JSON.stringify(data))
 
-            axios.post('http://localhost:1997/addimagetoko', formdata, options)
+            axios.post(API_URL + '/toko/addimagetoko', formdata, options)
                 .then(res => {
                     console.log(res.data)
                     this.getImageByTokoId(this.state.selectedToko.id)
@@ -112,7 +113,7 @@ class ManageToko extends Component {
 
             formdata.append('image', this.state.imageTokoEdit[0])
 
-            axios.put('http://localhost:1997/imagetoko/' + this.state.selectedEditImageId, formdata, options)
+            axios.put(API_URL + '/toko/imagetoko/' + this.state.selectedEditImageId, formdata, options)
                 .then(res => {
                     console.log(res.data)
                     this.setState({ selectedEditImageId: 0 })
@@ -128,7 +129,7 @@ class ManageToko extends Component {
 
     onBtnDeleteImageClick = (id) => {
         if(window.confirm('Are You Sure?')) {
-            axios.delete('http://localhost:1997/imagetoko/' + id)
+            axios.delete(API_URL + '/toko/imagetoko/' + id)
             .then(res => {
                 console.log(res.data)
                 this.getImageByTokoId(this.state.selectedToko.id)
@@ -191,7 +192,7 @@ class ManageToko extends Component {
     }
 
     onBtnAddClick = () => {
-        axios.post('http://localhost:1997/addtoko', {
+        axios.post(API_URL + '/toko/addtoko', {
             nama: this.state.inputNamaAdd,
             alamat: this.state.inputAlamatAdd,
             kotaId: this.state.selectedKotaAdd,
@@ -207,7 +208,7 @@ class ManageToko extends Component {
 
     onBtnDeleteClick = (id) => {
         if(window.confirm('Yakin nih bro?')) {
-            axios.delete('http://localhost:1997/deletetoko/' + id)
+            axios.delete(API_URL + '/toko/deletetoko/' + id)
             .then((res) => {
                 console.log(res.data)
                 this.getInitialData()
@@ -218,7 +219,7 @@ class ManageToko extends Component {
     }
 
     onBtnSaveUpdateClick = () => {
-        axios.put('http://localhost:1997/edittoko/' + this.state.selectedEditId, {
+        axios.put(API_URL + '/toko/edittoko/' + this.state.selectedEditId, {
             nama: this.state.inputNamaEdit,
             alamat: this.state.inputAlamatEdit,
             kotaId: this.state.selectedKotaEdit,
@@ -232,7 +233,7 @@ class ManageToko extends Component {
     }
 
     getImageByTokoId = (id) => {
-        axios.get('http://localhost:1997/imagetoko/' + id)
+        axios.get(API_URL + '/toko/imagetoko/' + id)
             .then(res => {
                 console.log(res.data)
                 this.setState({ listImageToko: res.data })
@@ -343,7 +344,7 @@ class ManageToko extends Component {
                         <td>{item.pathName}</td>
                         <td>
                             <img 
-                                src={`http://localhost:1997${item.pathName}`}
+                                src={`${API_URL}${item.pathName}`}
                                 style={{ width: '100px' }}
                             />
                         </td>
@@ -360,7 +361,7 @@ class ManageToko extends Component {
                     <td><input type="file" onChange={this.imageTokoEditChange} /></td>
                     <td>
                         <img 
-                            src={`http://localhost:1997${item.pathName}`}
+                            src={`${API_URL}${item.pathName}`}
                             style={{ width: '100px' }}
                         />
                     </td>

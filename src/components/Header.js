@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
   import { connect } from 'react-redux';
+  import { logoutUser } from '../actions';
 
 class Header extends React.Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class Header extends React.Component {
                     Option 2
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
+                  <DropdownItem onClick={this.props.logoutUser}>
                     Logout
                   </DropdownItem>
                 </DropdownMenu>
@@ -93,4 +94,4 @@ const mapStateToProps = ({ user }) => {
     return { user }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);

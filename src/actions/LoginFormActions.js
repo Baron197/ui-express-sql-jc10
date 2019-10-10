@@ -8,6 +8,8 @@ import {
     LOGIN_FAILED
 } from './types';
 
+import { API_URL } from '../helpers/apiurl'
+
 export const inputLoginEmail = (email) => {
     return {
         type: LOGIN_EMAIL_CHANGED,
@@ -26,7 +28,7 @@ export const loginUser = (user) => {
     return (dispatch) => {
         dispatch({ type: ON_USER_LOGIN })
         if(user.email !== '' && user.password !== '') {
-            axios.post('http://localhost:1997/login', {
+            axios.post(API_URL + '/user/login', {
                 email: user.email,
                 password: user.password
             }).then(res => {
