@@ -30,8 +30,10 @@ export const loginUser = (user) => {
                 email: user.email,
                 password: user.password
             }).then(res => {
+                localStorage.setItem('token', res.data.token)
                 dispatch({
-                    type: LOGIN_SUCCESS
+                    type: LOGIN_SUCCESS,
+                    payload: res.data
                 })
             }).catch(err => {
                 console.log(err.response)
