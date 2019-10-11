@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { 
     inputLoginEmail,
     inputLoginPassword,
@@ -28,6 +29,10 @@ class Login extends Component {
             email,
             password
         } = this.props.loginForm;
+
+        if(this.props.user.username !== '') {
+          return <Redirect to="/" />
+        }
 
         return (
             <MDBContainer className="pt-5">
@@ -71,8 +76,8 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = ({ loginForm }) => {
-    return { loginForm }
+const mapStateToProps = ({ loginForm, user }) => {
+    return { loginForm, user }
 }
 
 export default connect(mapStateToProps, {inputLoginEmail,inputLoginPassword,loginUser})(Login);

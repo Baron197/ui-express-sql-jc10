@@ -29,6 +29,10 @@ class Register extends React.Component {
     }
 
     render() {
+      if(this.props.user.username !== '') {
+        return <Redirect to="/" />
+      }
+
       if(!this.props.registerForm.success) {
         const { 
           email, 
@@ -37,6 +41,7 @@ class Register extends React.Component {
           confirmEmail, 
           confirmPassword 
       } = this.props.registerForm;
+
       return (
           <MDBContainer className="pt-5">
             <MDBRow className="justify-content-center">
@@ -114,8 +119,8 @@ class Register extends React.Component {
   
 }
 
-const mapStateToProps = ({ registerForm }) => {
-    return { registerForm }
+const mapStateToProps = ({ registerForm, user }) => {
+    return { registerForm, user }
 }
 
 export default connect(mapStateToProps, { 
