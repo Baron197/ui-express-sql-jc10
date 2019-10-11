@@ -30,6 +30,16 @@ class Header extends React.Component {
     });
   }
   render() {
+    if(!this.props.user.authchecked) {
+      return (
+        <div>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Toko Berkah</NavbarBrand>
+          </Navbar>
+        </div>
+      );
+    }
+
     if(this.props.user.username === '') {
       return (
         <div>

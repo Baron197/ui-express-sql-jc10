@@ -29,6 +29,9 @@ export const checkKeepLogin = (token) => {
             }).catch(err => {
                 localStorage.removeItem('token')
                 console.log(err.response.data)
+                dispatch({
+                    type: LOGOUT_USER
+                })
             })
     }
 }

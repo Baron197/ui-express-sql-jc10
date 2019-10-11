@@ -7,15 +7,16 @@ const INITIAL_STATE = {
     username: '',
     email: '',
     status: '',
-    token: ''
+    token: '',
+    authchecked: false
 }
 
 export default (state=INITIAL_STATE, action) => {
     switch(action.type) {
         case LOGIN_SUCCESS :
-            return action.payload
+            return { ...action.payload, authchecked: true }
         case LOGOUT_USER :
-            return INITIAL_STATE
+            return { ...INITIAL_STATE, authchecked: true }
         default :
             return state
     }
